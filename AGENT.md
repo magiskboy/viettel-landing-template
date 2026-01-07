@@ -25,6 +25,12 @@ You are an AI agent tasked with creating landing pages for Viettel campaigns. Th
 ## 2. Component Reference
 
 **Use pre-built components. Do not invent new UI patterns.**
+
+**STRICT RULE:** You are **NOT ALLOWED** to modify any files in `src/components/*`. These are stable, core building blocks.
+
+- If you need a variation, first try to use existing props (e.g., `fullHeight` in Hero).
+- If functionality is completely missing, create a **NEW** component (e.g., `src/components/NewFeatureCard.tsx`) that strictly follows the Design Guidelines.
+
 Read the component files to understand their props interfaces.
 
 ### A. Layout Wrappers
