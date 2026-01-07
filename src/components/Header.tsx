@@ -18,13 +18,19 @@ export const Header: React.FC = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          {['Về Viettel', 'Dịch vụ', 'Khách hàng', 'Tin tức', 'Liên hệ'].map((item) => (
+          {[
+            { label: 'Về Viettel', href: '/ve-viettel' },
+            { label: 'Dịch vụ', href: '/dich-vu' },
+            { label: 'Khách hàng', href: '/khach-hang' },
+            { label: 'Tin tức', href: '/tin-tuc' },
+            { label: 'Liên hệ', href: '/lien-he' }
+          ].map((item) => (
             <Link 
-              key={item} 
-              href="#" 
+              key={item.label} 
+              href={item.href} 
               className="text-gray-600 hover:text-viettel-red font-medium text-sm uppercase transition-colors"
             >
-              {item}
+              {item.label}
             </Link>
           ))}
         </nav>

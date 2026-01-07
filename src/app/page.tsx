@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { Hero } from '@/components/Hero';
+import { HeroSectionGrid } from '@/components/HeroSectionGrid';
 import { Section } from '@/components/Section';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
@@ -15,12 +15,12 @@ export default function LandingTemplate() {
       <Header />
       
       {/* SECTION 1: HERO - Campaign Main Visual */}
-      <Hero 
+      {/* SECTION 1: HERO - Campaign Main Visual */}
+      <HeroSectionGrid 
         title="KIẾN TẠO XÃ HỘI SỐ"
         subtitle="Tiên phong chủ lực kiến tạo xã hội số, Viettel cam kết mang lại những giá trị tốt đẹp nhất cho con người."
         ctaText="Khám phá ngay"
-        // Example background image, replace with campaign asset
-        // backgroundImage="/path-to-your-image.jpg"
+        fullHeight
       />
 
       {/* SECTION 2: KEY SERVICES/BENEFITS */}
@@ -170,21 +170,18 @@ export default function LandingTemplate() {
                 description="Tập đoàn Công nghiệp – Viễn thông Quân đội Viettel vừa được vinh danh tại ba giải thưởng quốc tế lớn về công nghệ và viễn thông."
                 date="Thứ năm, 11/12/2025"
                 category="TIN BÁO CHÍ"
-                image="https://viettel.com.vn/images/Viettel-thang-lon-tai-cac-giai-thuong-quoc-te-uy-tin-thumb-244247854.jpg" 
             />
              <NewsCard 
                 title="THÔNG BÁO KẾT QUẢ LỰA CHỌN TỔ CHỨC ĐẤU GIÁ TÀI SẢN"
                 description="Thông báo kết quả lựa chọn tổ chức đấu giá tài sản lô 30 xe ô tô đã qua sử dụng, không còn nhu cầu sử dụng."
                 date="Thứ tư, 28/11/2025"
                 category="THÔNG BÁO"
-                image="https://viettel.com.vn/images/TB-kq-lua-chon-to-chuc-dau-gia-tai-san-lo-30-xe-o-to-cu-thumb-2070967397.jpg" 
             />
              <NewsCard 
                 title="VIETTEL KHAI TRƯƠNG VĂN PHÒNG ĐẠI DIỆN TẠI UAE"
                 description="Tập đoàn chính thức khai trương Văn phòng đại diện tại Các Tiểu vương quốc Ả Rập Thống nhất (UAE), đánh dấu bước tiến mới."
                 date="Thứ năm, 20/11/2025"
                 category="TIN TẬP ĐOÀN"
-                image="https://viettel.com.vn/images/Viettel-High-Tech-khai-truong-van-phong-dai-dien-tai-UAE-thumb-299622591.jpg" 
             />
         </div>
       </Section>

@@ -13,13 +13,13 @@ export const Card: React.FC<CardProps> = ({ title, description, icon, image, cla
   return (
     <div className={classNames('bg-white p-6 md:p-8 h-full flex flex-col hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-gray-100 group', className)}>
       {image && (
-        <div className="mb-6 overflow-hidden h-48 w-full bg-gray-100">
+        <div className="mb-6 overflow-hidden h-48 w-full bg-gray-100 mx-auto">
              {/* eslint-disable-next-line @next/next/no-img-element */}
              <img src={image} alt={title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"/>
         </div>
       )}
       {icon && (
-        <div className="mb-6 text-viettel-red w-12 h-12">
+        <div className="mb-6 text-viettel-red w-12 h-12 mx-auto">
           {icon}
         </div>
       )}
