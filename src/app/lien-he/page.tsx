@@ -5,6 +5,13 @@ import { HeroSectionGrid } from '@/components/HeroSectionGrid';
 import { Section } from '@/components/Section';
 import { ContactForm } from '@/components/ContactForm';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Liên hệ | Viettel Telecom',
+  description: 'Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn 24/7.',
+};
+
 export default function ContactPage() {
   return (
     <main className="min-h-screen flex flex-col pt-16 font-sans">

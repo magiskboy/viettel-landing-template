@@ -4,6 +4,13 @@ import { Footer } from '@/components/Footer';
 import { HeroSectionGrid } from '@/components/HeroSectionGrid';
 import { Section } from '@/components/Section';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Khách hàng & Cộng đồng | Viettel Telecom',
+  description: 'Kinh doanh gắn liền với trách nhiệm xã hội.',
+};
+
 export default function CustomersPage() {
   return (
     <main className="min-h-screen flex flex-col pt-16 font-sans">

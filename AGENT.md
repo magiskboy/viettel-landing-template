@@ -59,13 +59,27 @@ Read the component files to understand their props interfaces.
 
 1.  Create `page.tsx` in a new subdirectory under `src/app/`.
 
-### Phase 2: Scaffold
+### Phase 2: Metadata (Crucial for Page Titles)
+
+**ALWAYS** export a `metadata` object to set the browser tab title and SEO description.
+This allows easy title updates without digging into HTML.
+
+```tsx
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tên Chiến Dịch | Viettel Telecom", // Update this easeily
+  description: "Mô tả ngắn gọn về chiến dịch...",
+};
+```
+
+### Phase 3: Scaffold
 
 1.  Import components from `@/components/...`.
 2.  Structure the page using the `Section` component.
     - **Refrence**: `src/components/Section.tsx` regarding `bg` props (white/gray alternation).
 
-### Phase 3: Content POPULATION
+### Phase 4: Content POPULATION
 
 1.  **Icons**: Use inline SVGs.
     - _Style Ref_: Look at `src/app/page.tsx` to see how SVGs are sized/styled inside Cards.

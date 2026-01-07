@@ -9,6 +9,13 @@ import { ContactForm } from '@/components/ContactForm';
 import { NewsCard } from '@/components/NewsCard';
 import { TabNavigation } from '@/components/TabNavigation';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Trang chủ | Viettel Telecom',
+  description: 'Tiên phong chủ lực kiến tạo xã hội số',
+};
+
 export default function LandingTemplate() {
   return (
     <main className="min-h-screen flex flex-col pt-16">

@@ -5,6 +5,13 @@ import { HeroSectionGrid } from '@/components/HeroSectionGrid';
 import { Section } from '@/components/Section';
 import { NewsCard } from '@/components/NewsCard';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Tin tức & Sự kiện | Viettel Telecom',
+  description: 'Cập nhật tin tức mới nhất về hoạt động của Viettel.',
+};
+
 export default function NewsPage() {
   return (
     <main className="min-h-screen flex flex-col pt-16 font-sans">

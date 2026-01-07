@@ -9,6 +9,13 @@ import { Button } from '@/components/Button';
 import { ContactForm } from '@/components/ContactForm';
 import { TabNavigation } from '@/components/TabNavigation';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '5G Siêu Tốc Gen Z | Viettel 5G',
+  description: 'Gói cước 5G thiết kế riêng cho Gen Z - Data thả ga, sống cực chất.',
+};
+
 export default function Landing5GGenZ() {
   return (
     <main className="min-h-screen flex flex-col pt-16 font-sans">

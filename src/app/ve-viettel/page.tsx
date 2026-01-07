@@ -5,6 +5,13 @@ import { HeroSectionGrid } from '@/components/HeroSectionGrid';
 import { Section } from '@/components/Section';
 
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Về Viettel | Viettel Telecom',
+  description: 'Sáng tạo vì con người - Tiên phong chủ lực kiến tạo xã hội số.',
+};
+
 export default function AboutPage() {
   return (
     <main className="min-h-screen flex flex-col pt-16 font-sans">
