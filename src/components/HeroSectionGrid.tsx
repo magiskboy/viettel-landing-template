@@ -1,6 +1,9 @@
-import React from 'react';
+"use client";
 
+import React from 'react';
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
+import { AnimatedRevealText } from './AnimatedRevealText';
 
 interface HeroSectionGridProps {
   title: string;
@@ -19,64 +22,112 @@ export const HeroSectionGrid: React.FC<HeroSectionGridProps> = ({
   className,
   fullHeight = false,
 }) => {
-  // Abstract grid pattern based on Viettel's design style
-  // Using pure CSS grid to create the red/white block layout
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const blockVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: { 
+      scale: 1, 
+      opacity: 1, 
+      transition: { 
+        type: 'spring' as const, 
+        damping: 15 
+      } 
+    },
+  };
+
   return (
     <div className={classNames(
-      "relative w-full flex flex-wrap bg-viettel-red",
+      "relative w-full flex flex-wrap bg-[#ee0033] overflow-hidden",
       fullHeight ? "min-h-[calc(100vh-4rem)]" : "min-h-[600px]",
       className
     )}>
       
       {/* LEFT CONTENT AREA */}
-      <div className="w-full md:w-1/2 p-8 md:p-20 flex flex-col justify-center relative z-20">
-        <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 uppercase leading-tight">
-          {title}
-        </h1>
+      <motion.div 
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        className="w-full md:w-1/2 p-8 md:p-20 flex flex-col justify-center relative z-20"
+      >
+        <div className="text-4xl md:text-6xl font-extrabold text-white mb-6 uppercase leading-tight">
+          <AnimatedRevealText text={title} animation="slide-up" />
+        </div>
+        
         {subtitle && (
-          <p className="text-white/90 text-lg md:text-xl mb-10 max-w-xl leading-relaxed font-light">
+          <motion.p 
+            variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 0.9, y: 0, transition: { delay: 0.8 } }
+            }}
+            className="text-white/90 text-lg md:text-xl mb-10 max-w-xl leading-relaxed font-light"
+          >
             {subtitle}
-          </p>
+          </motion.p>
         )}
-        <div className="inline-block">
+        
+        <motion.div 
+            variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { delay: 1.2 } }
+            }}
+            className="inline-block"
+        >
             <span 
                 className="text-white text-sm font-bold uppercase border-b-2 border-white pb-1 cursor-pointer hover:opacity-80 transition-opacity tracking-widest"
                 onClick={onCtaClick}
             >
                 {ctaText}
             </span>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* RIGHT GRID PATTERN AREA */}
       <div className="w-full md:w-1/2 relative h-[400px] md:h-auto overflow-hidden">
-        {/* CSS GRID LAYOUT for Abstract Blocks */}
-        <div className="absolute inset-0 grid grid-cols-4 grid-rows-4 gap-0">
-             
+        <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className="absolute inset-0 grid grid-cols-4 grid-rows-4 gap-0"
+        >
              {/* Block 1: Red Darker Overlay */}
-             <div className="col-span-2 row-span-2 bg-[#D1002C]"></div>
+             <motion.div variants={blockVariants} className="col-span-2 row-span-2 bg-[#D1002C] hover:bg-[#b00025] transition-colors duration-500"></motion.div>
              
              {/* Block 2: White/Transparent with Border */}
-             <div className="col-span-2 row-span-1 bg-white/10 backdrop-blur-sm border-l border-white/20"></div>
+             <motion.div variants={blockVariants} className="col-span-2 row-span-1 bg-white/10 backdrop-blur-sm border-l border-white/20"></motion.div>
              
              {/* Block 3: Pure Viettel Red (invisible usually but fills gap) */}
-             <div className="col-span-1 row-span-1 bg-viettel-red"></div>
+             <motion.div variants={blockVariants} className="col-span-1 row-span-1 bg-[#ee0033]"></motion.div>
              
              {/* Block 4: White Box (Accent) */}
-             <div className="col-span-1 row-span-1 bg-white"></div>
+             <motion.div 
+                variants={blockVariants} 
+                whileHover={{ scale: 1.05, zIndex: 10 }}
+                className="col-span-1 row-span-1 bg-white"
+             ></motion.div>
              
              {/* Block 5: Large Red Area */}
-             <div className="col-span-2 row-span-2 bg-[#C40029]"></div>
+             <motion.div variants={blockVariants} className="col-span-2 row-span-2 bg-[#C40029] hover:bg-[#a30022] transition-colors duration-500"></motion.div>
              
              {/* Block 6: Light Red */}
-             <div className="col-span-2 row-span-1 bg-[#FF3355]"></div>
+             <motion.div variants={blockVariants} className="col-span-2 row-span-1 bg-[#FF3355]"></motion.div>
              
              {/* Block 7-8: Bottom Row */}
-             <div className="col-span-1 row-span-1 bg-white/5"></div>
-             <div className="col-span-3 row-span-1 bg-[#B30026]"></div>
-        </div>
+             <motion.div variants={blockVariants} className="col-span-1 row-span-1 bg-white/5"></motion.div>
+             <motion.div variants={blockVariants} className="col-span-3 row-span-1 bg-[#B30026]"></motion.div>
+        </motion.div>
 
-        {/* Optional: Overlay graphic lines if needed for more texture */}
+        {/* Optional: Overlay graphic lines */}
         <div className="absolute inset-0 opacity-20 pointer-events-none" 
              style={{ backgroundImage: 'radial-gradient(circle at center, white 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
         </div>
@@ -84,3 +135,4 @@ export const HeroSectionGrid: React.FC<HeroSectionGridProps> = ({
     </div>
   );
 };
+
