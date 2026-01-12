@@ -101,30 +101,72 @@ export const HeroSectionGrid: React.FC<HeroSectionGridProps> = ({
             className="absolute inset-0 grid grid-cols-4 grid-rows-4 gap-0"
         >
              {/* Block 1: Red Darker Overlay */}
-             <motion.div variants={blockVariants} className="col-span-2 row-span-2 bg-[#D1002C] hover:bg-[#b00025] transition-colors duration-500"></motion.div>
+             <motion.div 
+                variants={blockVariants} 
+                animate={{ 
+                    y: [0, -10, 0],
+                    transition: { duration: 5, repeat: Infinity, ease: "easeInOut" }
+                }}
+                className="col-span-2 row-span-2 bg-[#D1002C] hover:bg-[#b00025] transition-colors duration-500"
+             ></motion.div>
              
              {/* Block 2: White/Transparent with Border */}
-             <motion.div variants={blockVariants} className="col-span-2 row-span-1 bg-white/10 backdrop-blur-sm border-l border-white/20"></motion.div>
+             <motion.div 
+                variants={blockVariants} 
+                animate={{ 
+                    opacity: [0.1, 0.2, 0.1],
+                    transition: { duration: 4, repeat: Infinity, ease: "linear" }
+                }}
+                className="col-span-2 row-span-1 bg-white/10 backdrop-blur-sm border-l border-white/20"
+             ></motion.div>
              
-             {/* Block 3: Pure Viettel Red (invisible usually but fills gap) */}
-             <motion.div variants={blockVariants} className="col-span-1 row-span-1 bg-[#ee0033]"></motion.div>
+             {/* Block 3: Pure Viettel Red */}
+             <motion.div 
+                variants={blockVariants} 
+                className="col-span-1 row-span-1 bg-[#ee0033]"
+             ></motion.div>
              
-             {/* Block 4: White Box (Accent) */}
+             {/* Block 4: White Box (Accent) - Persistent Pulse */}
              <motion.div 
                 variants={blockVariants} 
                 whileHover={{ scale: 1.05, zIndex: 10 }}
+                animate={{ 
+                    scale: [1, 1.03, 1],
+                    transition: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                }}
                 className="col-span-1 row-span-1 bg-white"
              ></motion.div>
              
              {/* Block 5: Large Red Area */}
-             <motion.div variants={blockVariants} className="col-span-2 row-span-2 bg-[#C40029] hover:bg-[#a30022] transition-colors duration-500"></motion.div>
+             <motion.div 
+                variants={blockVariants} 
+                animate={{ 
+                    x: [0, 5, 0],
+                    transition: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+                }}
+                className="col-span-2 row-span-2 bg-[#C40029] hover:bg-[#a30022] transition-colors duration-500"
+             ></motion.div>
              
-             {/* Block 6: Light Red */}
-             <motion.div variants={blockVariants} className="col-span-2 row-span-1 bg-[#FF3355]"></motion.div>
+             {/* Block 6: Light Red - Constant Flow */}
+             <motion.div 
+                variants={blockVariants} 
+                animate={{ 
+                    filter: ["brightness(1)", "brightness(1.1)", "brightness(1)"],
+                    transition: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                }}
+                className="col-span-2 row-span-1 bg-[#FF3355]"
+             ></motion.div>
              
              {/* Block 7-8: Bottom Row */}
              <motion.div variants={blockVariants} className="col-span-1 row-span-1 bg-white/5"></motion.div>
-             <motion.div variants={blockVariants} className="col-span-3 row-span-1 bg-[#B30026]"></motion.div>
+             <motion.div 
+                variants={blockVariants} 
+                animate={{ 
+                    opacity: [0.8, 1, 0.8],
+                    transition: { duration: 5, repeat: Infinity, ease: "easeInOut" }
+                }}
+                className="col-span-3 row-span-1 bg-[#B30026]"
+             ></motion.div>
         </motion.div>
 
         {/* Optional: Overlay graphic lines */}

@@ -1,6 +1,6 @@
 # Viettel Landing Page Generation Instructions
 
-You are an AI agent tasked with creating landing pages for Viettel campaigns. This project uses a strictly component-based architecture with Next.js (App Router), TypeScript, and Tailwind CSS.
+You are an AI agent tasked with creating landing pages for Viettel campaigns. This project uses a strictly component-based architecture with Next.js (App Router), TypeScript, Tailwind CSS, and Framer Motion for premium animations.
 
 **Primary Directive:** maximizing reusability and consistency by referencing existing code/files rather than hardcoding values.
 
@@ -20,34 +20,41 @@ You are an AI agent tasked with creating landing pages for Viettel campaigns. Th
   - Font is globally set to `Sarabun` via `layout.tsx` and `globals.css`. Use standard Tailwind `font-sans`.
   - Headings should typically be `uppercase` and `font-bold` or `font-extrabold`.
 - **Shape:**
-  - **Sharp Edges Only**: The global CSS enforces `border-radius: 0 !important;`. Do NOT attempt to add rounded corners (`rounded-md`, `rounded-full`, etc.) unless specifically overriding for a specific component design requirement already present in the UI library.
+  - **Sharp Edges Only**: The global CSS enforces `border-radius: 0 !important;`. However, for interactive "Client Components" (like Magnetic Buttons), subtle overrides may be used to enhance UX while maintaining the "Sharp" brand vibe.
+- **Motion (Premium Experience):**
+  - **Persistent Motion**: Use ambient backgrounds or infinite loops for key visual elements to keep the page feeling "alive".
+  - **Reveal on Scroll**: All major sections should use viewport reveal animations.
+  - **Micro-interactions**: Use magnetic effects or scale transforms for buttons.
 
 ## 2. Component Reference
 
 **Use pre-built components. Do not invent new UI patterns.**
 
-**STRICT RULE:** You are **NOT ALLOWED** to modify any files in `src/components/*`. These are stable, core building blocks.
+### A. Layout & Global
 
-- If you need a variation, first try to use existing props (e.g., `fullHeight` in Hero).
-- If functionality is completely missing, create a **NEW** component (e.g., `src/components/NewFeatureCard.tsx`) that strictly follows the Design Guidelines.
+| Component       | Reference File                   | Key Notes                                        |
+| :-------------- | :------------------------------- | :----------------------------------------------- | -------- |
+| **Header**      | `src/components/Header.tsx`      | Include at top of `main`.                        |
+| **Footer**      | `src/components/Footer.tsx`      | Include at bottom of `main`.                     |
+| **AmbientGlow** | `src/components/AmbientGlow.tsx` | **Mandatory** at the root of the page for depth. |
+| **Section**     | `src/components/Section.tsx`     | Use for all content blocks. Props: `bg="white"   | "gray"`. |
 
-Read the component files to understand their props interfaces.
+### B. Interactive Atoms (Animations)
 
-### A. Layout Wrappers
+| Component              | Reference File                          | Key Notes                                       |
+| :--------------------- | :-------------------------------------- | :---------------------------------------------- |
+| **AnimatedRevealText** | `src/components/AnimatedRevealText.tsx` | Staggered text entrance. Good for Hero titles.  |
+| **ViewportReveal**     | `src/components/ViewportReveal.tsx`     | Wrapper for scroll-in animations.               |
+| **MagneticButton**     | `src/components/MagneticButton.tsx`     | High-intent CTA button with hover/glow effects. |
+| **BrandMarquee**       | `src/components/BrandMarquee.tsx`       | Persistent text scroll for brand slogans.       |
 
-| Component   | Reference File               | Key Notes                                      |
-| :---------- | :--------------------------- | :--------------------------------------------- | -------- |
-| **Header**  | `src/components/Header.tsx`  | Include at top of `main`.                      |
-| **Footer**  | `src/components/Footer.tsx`  | Include at bottom of `main`.                   |
-| **Section** | `src/components/Section.tsx` | Use for all content blocks. Props: `bg="white" | "gray"`. |
+### C. Hero Section
 
-### B. Hero Section
+| Component           | Reference File                       | Key Notes                                                                     |
+| :------------------ | :----------------------------------- | :---------------------------------------------------------------------------- |
+| **HeroSectionGrid** | `src/components/HeroSectionGrid.tsx` | **Mandatory** for page headers. Now includes persistent geometric animations. |
 
-| Component           | Reference File                       | Key Notes                                                                           |
-| :------------------ | :----------------------------------- | :---------------------------------------------------------------------------------- |
-| **HeroSectionGrid** | `src/components/HeroSectionGrid.tsx` | **Mandatory** for page headers. **ALWAYS** use `fullHeight` prop for the main hero. |
-
-### C. Content Components
+### D. Content Components
 
 | Component         | Reference File                     | Key Notes                                           |
 | :---------------- | :--------------------------------- | :-------------------------------------------------- |
@@ -58,50 +65,40 @@ Read the component files to understand their props interfaces.
 
 ## 3. Workflow
 
-**Refrence Implementation:** `src/app/5g-genz/page.tsx`
-(Read this file before generating any code. It is the Golden Standard.)
+**Reference Implementation:** `src/app/LandingContent.tsx` (Client) + `src/app/page.tsx` (Server)
 
-### Phase 1: Setup
+### Phase 1: Split Architecture
 
-1.  Create `page.tsx` in a new subdirectory under `src/app/`.
+Next.js App Router requires splitting Server components (for Metadata) and Client components (for Motion).
 
-### Phase 2: Metadata (Crucial for Page Titles)
+1. Create `src/app/[slug]/LandingContent.tsx` (Use `"use client"`).
+2. Create `src/app/[slug]/page.tsx` (Server component for Metadata).
 
-**ALWAYS** export a `metadata` object to set the browser tab title and SEO description.
-This allows easy title updates without digging into HTML.
+### Phase 2: Metadata
 
 ```tsx
-import type { Metadata } from "next";
-
 export const metadata: Metadata = {
-  title: "Tên Chiến Dịch | Viettel Telecom", // Update this easeily
-  description: "Mô tả ngắn gọn về chiến dịch...",
+  title: "Creative Campaign | Viettel Telecom",
+  description: "Innovation at your fingertips.",
 };
 ```
 
-### Phase 3: Scaffold
+### Phase 3: Infinite Lifecycle
 
-1.  Import components from `@/components/...`.
-2.  Structure the page using the `Section` component.
-    - **Refrence**: `src/components/Section.tsx` regarding `bg` props (white/gray alternation).
+1. Place `<AmbientGlow />` at the very top of your `main` container.
+2. Use `<HeroSectionGrid />` to set the mood.
+3. Use `<BrandMarquee />` as a divider to keep the scroll rhythm.
+4. Wrap Every `<Section>` or nested `<Card>` in `<ViewportReveal>`.
 
-### Phase 4: Content POPULATION
+## 4. Key Rules (DO NOT VIOLATE)
 
-1.  **Icons**: Use inline SVGs.
-    - _Style Ref_: Look at `src/app/page.tsx` to see how SVGs are sized/styled inside Cards.
-2.  **Images**:
-    - Use assets from `public/` if available.
-    - If missing, use placeholders but keep valid paths (e.g. string paths).
+- **Metadata**: Never move Metadata to a file with `"use client"`.
+- **Hardcoding**: Never hardcode `#ee0033`. Use `viettel-red` or `var(--viettel-red)`.
+- **Button Props**: Do not pass functions as props from a Server Page to a Client Component. Put the functions inside the Client Component itself.
+- **Images**: Prefer Unsplash tech-vibe images for placeholders: `grayscale` until hovered.
 
-## 4. Key References (READ THESE)
+## 5. Anti-Patterns
 
-- **Global Variables**: `src/app/globals.css` (Colors, Global Reset).
-- **Layout Context**: `src/app/layout.tsx` (Fonts, Metadata).
-- **Hero Definition**: `src/components/HeroSectionGrid.tsx` (Understand `fullHeight` logic).
-- **Primary Example**: `src/app/5g-genz/page.tsx` (Copy this structure).
-
-## 5. Anti-Patterns (DO NOT DO)
-
-- **Never** hardcode `#ee0033`. Use `viettel-red`.
-- **Never** use `rounded` classes.
-- **Never** create a new Header/Footer component; use the global ones.
+- Static, dead backgrounds (Use AmbientGlow).
+- Abrupt text appearance (Use AnimatedRevealText).
+- Generic buttons (Use MagneticButton for primary CTAs).

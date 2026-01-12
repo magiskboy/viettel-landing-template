@@ -12,11 +12,13 @@ import { TabNavigation } from '@/components/TabNavigation';
 import { HeroSectionGrid } from '@/components/HeroSectionGrid';
 import { ViewportReveal } from '@/components/ViewportReveal';
 import { MagneticButton } from '@/components/MagneticButton';
-// import { DigitalGridBackground } from '@/components/DigitalGridBackground';
+import { BrandMarquee } from '@/components/BrandMarquee';
+import { AmbientGlow } from '@/components/AmbientGlow';
 
 export default function LandingContent() {
   return (
-    <main className="min-h-screen flex flex-col pt-16">
+    <main className="min-h-screen flex flex-col pt-16 relative">
+      <AmbientGlow />
       <Header />
       
       {/* SECTION 1: HERO - ANIMATED GRID VERSION */}
@@ -26,6 +28,8 @@ export default function LandingContent() {
         ctaText="Khám phá ngay"
         fullHeight
       />
+
+      <BrandMarquee />
 
       {/* SECTION 2: KEY SERVICES/BENEFITS */}
       <Section id="services">
